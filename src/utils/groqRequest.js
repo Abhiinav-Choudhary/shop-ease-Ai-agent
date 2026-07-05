@@ -1,3 +1,8 @@
+import {
+    ServiceUnavailableError,
+    RequestTimeoutError,
+} from "./errors.js";
+
 const MAX_RETRIES = 2;
 const TIMEOUT = 30000; // 30 seconds
 
@@ -46,6 +51,10 @@ export async function groqRequest(client, payload) {
 
     }
 
-    throw lastError;
+    if (lastError.message.includes("timed out")) {
+    throw new RequestTimeoutError();
+}
+
+throw new ServiceUnavailableError();
 
 }

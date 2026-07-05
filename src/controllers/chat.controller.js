@@ -36,11 +36,19 @@ export async function chatController(req, res) {
 
     } catch (err) {
 
-        console.log(err);
+    console.error(err);
 
-        res.status(500).json({
+    if (err.statusCode) {
+        return res.status(err.statusCode).json({
+            success: false,
             message: err.message,
         });
+    }
+
+    return res.status(500).json({
+        success: false,
+        message: "Internal Server Error",
+    });
 
     }
 

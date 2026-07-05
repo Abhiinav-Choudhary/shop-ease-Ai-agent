@@ -133,9 +133,7 @@ addConversationEntry(sessionId, toolResponse);
   
   catch(error){
 
-    console.error(error);
-
-    return "Sorry, our AI support service is temporarily unavailable. Please try again in a few moments.";
+   throw error;
 
 }
 }

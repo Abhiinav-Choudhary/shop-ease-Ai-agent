@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.post("/", createSessionController);
 
-router.get("/:id/history", getHistoryController);
+router.get("/:id/chat", getHistoryController);
 
 router.post("/:id/chat", chatController);
 
