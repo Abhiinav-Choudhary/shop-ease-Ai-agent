@@ -88,6 +88,47 @@ shop-ease-agent
 
 ---
 
+# Architecture
+
+The application follows a modular architecture that separates API routing, AI orchestration, business logic, storage, and tool implementations.
+
+### Request Flow
+
+```text
+Client
+   │
+   ▼
+Express REST API
+   │
+   ▼
+Session Management
+   │
+   ▼
+AI Agent Service
+   │
+   ▼
+Groq LLM
+   │
+   ▼
+Tool Selection
+   │
+   ├── searchKnowledgeBase()
+   ├── getOrderStatus()
+   ├── checkRefundEligibility()
+   └── escalateToHuman()
+   │
+   ▼
+Tool Result
+   │
+   ▼
+Groq LLM
+   │
+   ▼
+Final Response
+```
+
+The AI agent receives the user message, sends the conversation history and available tools to the LLM, executes any requested tools, feeds the tool results back to the LLM, and finally returns a natural language response to the user while maintaining conversation history for future interactions.
+
 # Installation
 
 Clone the repository
@@ -194,7 +235,7 @@ Sample Response
 GET /api/sessions/:id/history
 ```
 
----
+
 
 # AI Agent Workflow
 
@@ -328,6 +369,26 @@ without requiring the customer to provide the order number again.
 
 ---
 
+# What I Chose and Why
+
+### Express.js
+
+I chose Express.js because it is lightweight, easy to configure, and widely used for building REST APIs. Its middleware architecture helped keep the project modular by separating controllers, routes, services, and middleware.
+
+### Groq API
+
+I selected the Groq API with the Llama 3.3 70B Versatile model because it provides an OpenAI-compatible interface, excellent inference speed, free developer access, and built-in support for tool/function calling.
+
+### In-Memory Storage
+
+The assignment explicitly allowed in-memory storage. Therefore, JavaScript Maps were used to maintain conversation sessions and escalation tickets without introducing unnecessary database complexity.
+
+### Tool-Based Design
+
+Business logic was implemented as independent tools rather than embedding it inside the AI prompt. This separation improves maintainability and better represents how production AI agents interact with backend systems.
+
+---
+
 # Error Handling
 
 The application handles
@@ -381,6 +442,40 @@ I want to speak to a human agent.
 * Business logic was separated into independent tools to improve maintainability.
 * Conversation history is preserved throughout a session for contextual responses.
 * Retry and timeout mechanisms improve reliability when communicating with the LLM.
+
+---
+
+# What I Learned
+
+This assignment was my first experience building an AI agent using LLM tool/function calling.
+
+During development I learned:
+
+- How modern LLMs perform function/tool calling.
+- How to build an agent loop that executes tools and feeds results back to the model.
+- How conversation history enables contextual follow-up questions.
+- How prompt engineering influences tool selection and reduces hallucinations.
+- How to design a modular backend architecture by separating controllers, services, tools, and storage.
+- How retry logic and timeout handling improve the reliability of AI applications.
+
+Overall, this project significantly improved my understanding of practical AI application development beyond traditional REST API development.
+
+---
+
+# What I Learned
+
+This assignment was my first experience building an AI agent using LLM tool/function calling.
+
+During development I learned:
+
+- How modern LLMs perform function/tool calling.
+- How to build an agent loop that executes tools and feeds results back to the model.
+- How conversation history enables contextual follow-up questions.
+- How prompt engineering influences tool selection and reduces hallucinations.
+- How to design a modular backend architecture by separating controllers, services, tools, and storage.
+- How retry logic and timeout handling improve the reliability of AI applications.
+
+Overall, this project significantly improved my understanding of practical AI application development beyond traditional REST API development.
 
 ---
 
