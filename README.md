@@ -181,8 +181,7 @@ Response
 
 ```json
 {
-  "success": true,
-  "message": "ShopEase AI Agent is running"
+  "status": "ok"
 }
 ```
 
@@ -232,7 +231,7 @@ Sample Response
 ## Conversation History
 
 ```
-GET /api/sessions/:id/history
+GET /api/sessions/:id/chat
 ```
 
 
