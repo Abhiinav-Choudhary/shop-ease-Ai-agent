@@ -462,23 +462,6 @@ Overall, this project significantly improved my understanding of practical AI ap
 
 ---
 
-# What I Learned
-
-This assignment was my first experience building an AI agent using LLM tool/function calling.
-
-During development I learned:
-
-- How modern LLMs perform function/tool calling.
-- How to build an agent loop that executes tools and feeds results back to the model.
-- How conversation history enables contextual follow-up questions.
-- How prompt engineering influences tool selection and reduces hallucinations.
-- How to design a modular backend architecture by separating controllers, services, tools, and storage.
-- How retry logic and timeout handling improve the reliability of AI applications.
-
-Overall, this project significantly improved my understanding of practical AI application development beyond traditional REST API development.
-
----
-
 # Author
 
 Abhinav Chaudhary
